@@ -1,0 +1,1 @@
+Create a file named "google-api.txt" in "keys" folder and put Google API key inside.
