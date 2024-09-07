@@ -106,9 +106,13 @@ export enum CountryTag {
 }
 
 export enum Tag {
+    BIN = "Bin",
     BOLLARD = "Bollard",
     BUS_SIGN = "Bus Sign",
+    BUS_STOP = "Bus Stop",
     GOOGLE_CAR = "Google Car",
+    GUARD_RAIL = "Guard Rail",
+    MANHOLE = "Manhole",
     NATURE = "Nature",
     PLATE = "Plate",
     PEDESTRIAN_SIGN = "Pedestrian Sign",

@@ -7,15 +7,32 @@ import Nav from "../nav"
 
 import SearchImageForm from "./search-image-form"
 
+function shuffle(array: String[]) {
+    for (var i = array.length - 1; i >= 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
 export default function Page({ searchParams }) {
-    const ids: String[] = ImageMetadata.listIds();
+    var ids: String[] = ImageMetadata.listIds();
+    shuffle(ids);
+
     var imageTagsMap: {[id: String]: ImageTags} = {};
     ids.forEach(id => imageTagsMap[id] = ImageTags.readTagsFromFile(id));
 
     const countries = searchParams.countries;
     const tags = searchParams.tags;
+    
+    const outputSize = 12;
+    var currentSize = 0;
 
     const filteredIds = ids.filter(id => {
+        if (currentSize >= outputSize) {
+            return false;
+        }
         if (countries && !countries.includes(imageTagsMap[id].countryTag.toString())) {
             return false;
         }
@@ -25,6 +42,7 @@ export default function Page({ searchParams }) {
                 return false;
             }
         }
+        currentSize += 1;
         return true;
     });
 
