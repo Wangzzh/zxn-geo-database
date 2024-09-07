@@ -38,3 +38,4 @@ next-env.d.ts
 # credentials
 keys/google-api.txt
 .idea/*
+data/images/*
