@@ -3,6 +3,7 @@ import ImageTags from '../../data/image-tags'
 import Image from 'next/image'
 import Link from 'next/link'
 import {CountryTag, Tag} from "../../constants/tags"
+import Nav from "../nav"
 
 import SearchImageForm from "./search-image-form"
 
@@ -28,15 +29,18 @@ export default function Page({ searchParams }) {
     });
 
     return (
-        <div className="container text-center">
-            <SearchImageForm />
-            <div className="mb-3 mt-3 row">
-                <div style={{position: "relative"}}>
-                    {filteredIds.map(id =>
-                        <a href={`/image?id=${id}`} key={id}>
-                            <Image src={`/images/${id}.jpg`} width={200} height={200} alt="Map Image" key={id}></Image>
-                        </a>
-                    )}
+        <div>
+            <Nav />
+            <div className="container text-center">
+                <SearchImageForm />
+                <div className="mb-3 mt-3 row">
+                    <div style={{position: "relative"}}>
+                        {filteredIds.map(id =>
+                            <a href={`/image?id=${id}`} key={id}>
+                                <Image src={`/images/${id}.jpg`} width={200} height={200} alt="Map Image" key={id}></Image>
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
