@@ -37,7 +37,7 @@ class GoogleMapClient {
         return imageMetadata;
     }
 
-    public static async getStaticStreetView(imageMetadata: ImageMetadata) {
+    public static async getStaticStreetView(imageMetadata: ImageMetadata): Blob {
         const url = `https://maps.googleapis.com/maps/api/streetview?size=${imageMetadata.width}x${imageMetadata.height}&location=${imageMetadata.latitude},${imageMetadata.longitude}&heading=${imageMetadata.heading}&pitch=${imageMetadata.pitch}&fov=${imageMetadata.fov}&key=${await GoogleMapClient.getKey()}`;
         console.log("Fetching url: " + url);
         const response = await fetch(encodeURI(url));

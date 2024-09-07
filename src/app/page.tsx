@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import GoogleMapClient from "../client/google-map-client"
-import AddImageButton from "./add-image-button"
+import AddImageForm from "./add-image-form"
 
 export default function Home() {
 
@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <div className="container text-center">
-            <AddImageButton />
+            <AddImageForm />
         </div>
     );
 }
