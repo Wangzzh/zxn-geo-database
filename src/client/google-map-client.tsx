@@ -30,7 +30,7 @@ class GoogleMapClient {
         imageMetadata.latitude = result[1];
         imageMetadata.longitude = result[2];
         imageMetadata.fov = result[3];
-        imageMetadata.width = 900;
+        imageMetadata.width = 640;
         imageMetadata.height = 600;
         imageMetadata.pitch = -result[6];
         imageMetadata.heading = result[7];
@@ -51,7 +51,7 @@ class GoogleMapClient {
             return;
         }
         const blobArray = Buffer.from(await blob.arrayBuffer());
-        fs.writeFileSync(`data/images/${imageMetadata.id}.jpg`, blobArray, {encoding: "binary"}, (err) => {
+        fs.writeFileSync(`public/images/${imageMetadata.id}.jpg`, blobArray, {encoding: "binary"}, (err) => {
             if (err) {
                 console.log("Error writing image file: " + err.toString());
             }
