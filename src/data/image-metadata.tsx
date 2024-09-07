@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as path from 'path'
 
 class ImageMetadata {
     public id: String;
@@ -40,6 +41,12 @@ class ImageMetadata {
         imageData.height = splitData[5];
         imageData.fov = splitData[6];
         return imageData;
+    }
+
+    public static listIds(): String[] {
+        const dir = path.resolve("./public", "images");
+        const filenames = fs.readdirSync(dir);
+        return filenames.map(n => n.toString().split('.')[0]);
     }
 }
 
