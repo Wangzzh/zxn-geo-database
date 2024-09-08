@@ -1,18 +1,16 @@
 'use client'
 
 import React from 'react';
-import {CountryTag, Tag} from "../constants/tags"
+import {CountryTag, Tag} from "../../constants/tags"
 
-export default function AddImageForm() {
+export default function AddTagForm({props}) {
 
-    const [url, setUrl] = React.useState();
-    const [countryTag, setCountryTag] = React.useState(CountryTag.NULL);
-    const [tags, setTags] = React.useState([]);
+    const [countryTag, setCountryTag] = React.useState<CountryTag>(props.currentCountryTag ? props.currentCountryTag as CountryTag : CountryTag.NULL);
+    const [tags, setTags] = React.useState<Tag[]>(props.currentTags && props.currentTags.length != 0 ? props.currentTags.map(t => t as Tag) : []);
 
-    async function addImage() {
-        console.log("URL: " + url.toString());
+    async function addTags() {
         const requestBody = {
-            url,
+            id: props.id,
             countryTag,
             tags
         };
@@ -21,12 +19,15 @@ export default function AddImageForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody)
         };
-        fetch("http://localhost:3000/api/images/add", options)
+        fetch("http://localhost:3000/api/images/tag", options)
             .then(response => response.json())
-            .then(data => alert(JSON.stringify(data)));
+            .then(data => {
+                alert(JSON.stringify(data));
+                window.location.reload();
+            });
 
-        setUrl("");
-        document.getElementById('mapUrlInput').value = "";
+        setCountryTag(CountryTag.NULL);
+        setTags([]);
     }
 
     const countryTagList = Object.values(CountryTag);
@@ -34,13 +35,6 @@ export default function AddImageForm() {
 
     return (
         <div>
-            <div className="mb-3 mt-3 row">
-                <label className="form-label">Google Map Full URL</label>
-                <input type="text" className="form-control" id="mapUrlInput" onInput={e => setUrl(e.target.value)}/>
-            </div>
-            <div className="mb-3 row">
-                <label className="form-label">Labels</label>
-            </div>
             <div className="mb-3 row">
                 <h3>
                     <span className="badge bg-secondary" key="country">{countryTag}</span>
@@ -52,7 +46,7 @@ export default function AddImageForm() {
             <div className="mb-3 row">
                 <select className="form-select" onChange={e => setCountryTag(e.target.value)}>
                     { countryTagList.map(value =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value} key={value} selected={countryTag == value ? true : undefined}>{value}</option>
                     )}
                 </select>
             </div>
@@ -63,12 +57,12 @@ export default function AddImageForm() {
                     setTags(values);
                 }}>
                     { tagList.map(value =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value} key={value} selected={tags.includes(value) ? true : undefined}>{value}</option>
                     )}
                 </select>
             </div>
             <div className="mb-3 mt-5 row">
-                <button type="submit" className="btn btn-primary" onClick={addImage}>Submit image</button>
+                <button type="submit" className="btn btn-primary" onClick={addTags}>Submit Tags</button>
             </div>
         </div>
     );

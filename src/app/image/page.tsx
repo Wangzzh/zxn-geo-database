@@ -3,6 +3,7 @@ import ImageTags from '../../data/image-tags'
 import Image from 'next/image'
 import Link from 'next/link'
 import Nav from "../nav"
+import AddTagForm from './add-tag-form'
 
 export default function Page({ searchParams }) {
     const id = searchParams.id;
@@ -38,6 +39,13 @@ export default function Page({ searchParams }) {
                     <p>FOV: {imageMetadata.fov}</p>
                     <p>Width: {imageMetadata.width}</p>
                     <p>Height: {imageMetadata.height}</p>
+                </div>
+                <div className="mb-3 mt-3 row">
+                    <AddTagForm props={{
+                        id: imageMetadata.id,
+                        currentCountryTag: imageTags.countryTag.toString(),
+                        currentTags: imageTags.tags.map(t => t.toString())
+                    }} />
                 </div>
             </div>
         </div>

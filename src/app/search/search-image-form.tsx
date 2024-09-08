@@ -3,10 +3,10 @@
 import React from 'react';
 import {CountryTag, Tag} from "../../constants/tags"
 
-export default function SearchImageForm() {
+export default function SearchImageForm({ searchParams }) {
 
-    const [countryTags, setCountryTags] = React.useState([]);
-    const [tags, setTags] = React.useState([]);
+    const [countryTags, setCountryTags] = React.useState<String []>(searchParams.countries ? searchParams.countries.split(',') : []);
+    const [tags, setTags] = React.useState<String []>(searchParams.tags ? searchParams.tags.split(",") : []);
 
     const countryTagList = Object.values(CountryTag);
     const tagList = Object.values(Tag);
@@ -14,14 +14,16 @@ export default function SearchImageForm() {
     function generateUrl() {
         var url = "search";
         var params = [];
-        if (countryTags.length != 0) {
-            params.push(`countries=${countryTags.join(",")}`);
+        var filteredCountryTags = countryTags.filter(t => t != "Null");
+        var filteredTags = tags.filter(t => t != "Null");
+        if (filteredCountryTags.length != 0) {
+            params.push(`countries=${filteredCountryTags.join(",")}`);
         }
-        if (tags.length != 0) {
-            params.push(`tags=${tags.join(",")}`);
+        if (filteredTags.length != 0) {
+            params.push(`tags=${filteredTags.join(",")}`);
         }
         if (params != []) {
-            url += `?${params.join("%")}`;
+            url += `?${params.join("&")}`;
         }
         return url.toString();
     }
@@ -33,33 +35,43 @@ export default function SearchImageForm() {
             </div>
             <div className="mb-3 row">
                 <h3>
-                    { countryTags.map((value, i) =>
+                    { countryTags.filter(t => t != "Null").map((value, i) =>
                         <span className="badge bg-secondary ml-3" key={i}>{value}</span>
                     )}
-                    { tags.map((value, i) =>
+                    { tags.filter(t => t != "Null").map((value, i) =>
                         <span className="badge bg-secondary ml-3" key={i}>{value}</span>
                     )}
                 </h3>
             </div>
             <div className="mb-3 row">
-                <select className="form-select" multiple={true} onChange={e => {
+                <select className="form-select" multiple={true} size={10} onChange={e => {
                     const options = [...e.target.selectedOptions];
                     const values = options.map(option => option.value);
-                    setCountryTags(values);
+                    if (values.includes("Null")) {
+                        setCountryTags([]);
+                    }
+                    if (values.toString() != countryTags.toString()) {
+                        setCountryTags(values);
+                    }
                 }}>
                     { countryTagList.map(value =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value} key={value} selected={countryTags.includes(value) ? true : undefined}>{value}</option>
                     )}
                 </select>
             </div>
             <div className="mb-3 row">
-                <select className="form-select" multiple={true} onChange={e => {
+                <select className="form-select" multiple={true} size={10} onChange={e => {
                     const options = [...e.target.selectedOptions];
                     const values = options.map(option => option.value);
-                    setTags(values);
+                    if (values.includes("Null")) {
+                        setTags([]);
+                    }
+                    if (values.toString() != tags.toString()) {
+                        setTags(values);
+                    }
                 }}>
                     { tagList.map(value =>
-                        <option value={value} key={value}>{value}</option>
+                        <option value={value} key={value} selected={tags.includes(value) ? true : undefined}>{value}</option>
                     )}
                 </select>
             </div>

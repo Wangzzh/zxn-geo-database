@@ -26,7 +26,7 @@ export default function Page({ searchParams }) {
     const countries = searchParams.countries;
     const tags = searchParams.tags;
     
-    const outputSize = 12;
+    const outputSize = 30;
     var currentSize = 0;
 
     const filteredIds = ids.filter(id => {
@@ -50,12 +50,12 @@ export default function Page({ searchParams }) {
         <div>
             <Nav />
             <div className="container text-center">
-                <SearchImageForm />
+                <SearchImageForm searchParams={searchParams}/>
                 <div className="mb-3 mt-3 row">
                     <div style={{position: "relative"}}>
                         {filteredIds.map(id =>
                             <a href={`/image?id=${id}`} key={id}>
-                                <Image src={`/images/${id}.jpg`} width={200} height={200} alt="Map Image" key={id}></Image>
+                                <Image src={`/images/${id}.jpg`} width={250} height={250} alt="Map Image" key={id}></Image>
                             </a>
                         )}
                     </div>
