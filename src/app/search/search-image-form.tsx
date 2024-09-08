@@ -36,10 +36,10 @@ export default function SearchImageForm({ searchParams }) {
             <div className="mb-3 row">
                 <h3>
                     { countryTags.filter(t => t != "Null").map((value, i) =>
-                        <span className="badge bg-secondary ml-3" key={i}>{value}</span>
+                        <span className="badge bg-dark ml-3" key={i}>{value}</span>
                     )}
                     { tags.filter(t => t != "Null").map((value, i) =>
-                        <span className="badge bg-secondary ml-3" key={i}>{value}</span>
+                        <span className="badge bg-dark ml-3" key={i}>{value}</span>
                     )}
                 </h3>
             </div>

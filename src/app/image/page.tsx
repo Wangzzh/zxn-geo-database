@@ -21,9 +21,9 @@ export default function Page({ searchParams }) {
                 </div>
                 <div className="mb-3 row">
                     <h3>
-                        <span className="badge bg-secondary" key="country">{imageTags.countryTag}</span>
+                        <span className="badge bg-dark" key="country">{imageTags.countryTag}</span>
                         { imageTags.tags.map((value, i) =>
-                            <span className="badge bg-secondary ml-3" key={i}>{value}</span>
+                            <span className="badge bg-dark ml-3" key={i}>{value}</span>
                         )}
                     </h3>
                 </div>
@@ -32,13 +32,13 @@ export default function Page({ searchParams }) {
                 </div>
                 <div className="mb-3 mt-3 row">
                     <p>ID: {imageMetadata.id}</p>
-                    <p>Latitude: {imageMetadata.latitude}</p>
-                    <p>Longitude: {imageMetadata.longitude}</p>
-                    <p>Heading: {imageMetadata.heading}</p>
-                    <p>Pitch: {imageMetadata.pitch}</p>
-                    <p>FOV: {imageMetadata.fov}</p>
-                    <p>Width: {imageMetadata.width}</p>
-                    <p>Height: {imageMetadata.height}</p>
+                    <p>Latitude: {imageMetadata.latitude.toString()}</p>
+                    <p>Longitude: {imageMetadata.longitude.toString()}</p>
+                    <p>Heading: {imageMetadata.heading.toString()}</p>
+                    <p>Pitch: {imageMetadata.pitch.toString()}</p>
+                    <p>FOV: {imageMetadata.fov.toString()}</p>
+                    <p>Width: {imageMetadata.width.toString()}</p>
+                    <p>Height: {imageMetadata.height.toString()}</p>
                 </div>
                 <div className="mb-3 mt-3 row">
                     <AddTagForm props={{

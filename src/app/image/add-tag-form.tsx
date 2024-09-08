@@ -36,15 +36,18 @@ export default function AddTagForm({props}) {
     return (
         <div>
             <div className="mb-3 row">
+                <h3><label className="form-label">Change tags</label></h3>
+            </div>
+            <div className="mb-3 row">
                 <h3>
-                    <span className="badge bg-secondary" key="country">{countryTag}</span>
+                    <span className="badge bg-dark" key="country">{countryTag}</span>
                     { tags.map((value, i) =>
-                        <span className="badge bg-secondary ml-3" key={i}>{value}</span>
+                        <span className="badge bg-dark ml-3" key={i}>{value}</span>
                     )}
                 </h3>
             </div>
             <div className="mb-3 row">
-                <select className="form-select" onChange={e => setCountryTag(e.target.value)}>
+                <select className="form-select" onChange={e => setCountryTag(e.target.value as CountryTag)}>
                     { countryTagList.map(value =>
                         <option value={value} key={value} selected={countryTag == value ? true : undefined}>{value}</option>
                     )}

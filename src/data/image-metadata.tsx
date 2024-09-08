@@ -2,14 +2,14 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 class ImageMetadata {
-    public id: String;
-    public latitude: Number;
-    public longitude: Number;
-    public pitch: Number;
-    public heading: Number;
-    public width: Number;
-    public height: Number;
-    public fov: Number;
+    public id: String = "";
+    public latitude: Number = NaN;
+    public longitude: Number = NaN;
+    public pitch: Number = NaN;
+    public heading: Number = NaN;
+    public width: Number = NaN;
+    public height: Number = NaN;
+    public fov: Number = NaN;
 
     public saveToFile() {
         const data = [
@@ -33,13 +33,13 @@ class ImageMetadata {
         const splitData = data.split(',');
         var imageData: ImageMetadata = new ImageMetadata();
         imageData.id = id;
-        imageData.latitude = splitData[0];
-        imageData.longitude = splitData[1];
-        imageData.pitch = splitData[2];
-        imageData.heading = splitData[3];
-        imageData.width = splitData[4];
-        imageData.height = splitData[5];
-        imageData.fov = splitData[6];
+        imageData.latitude = +splitData[0];
+        imageData.longitude = +splitData[1];
+        imageData.pitch = +splitData[2];
+        imageData.heading = +splitData[3];
+        imageData.width = +splitData[4];
+        imageData.height = +splitData[5];
+        imageData.fov = +splitData[6];
         return imageData;
     }
 

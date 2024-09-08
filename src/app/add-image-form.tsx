@@ -43,9 +43,9 @@ export default function AddImageForm() {
             </div>
             <div className="mb-3 row">
                 <h3>
-                    <span className="badge bg-secondary" key="country">{countryTag}</span>
+                    <span className="badge bg-danger" key="country">{countryTag}</span>
                     { tags.map((value, i) =>
-                        <span className="badge bg-secondary ml-3" key={i}>{value}</span>
+                        <span className="badge bg-danger ml-3" key={i}>{value}</span>
                     )}
                 </h3>
             </div>
@@ -68,7 +68,7 @@ export default function AddImageForm() {
                 </select>
             </div>
             <div className="mb-3 mt-5 row">
-                <button type="submit" className="btn btn-primary" onClick={addImage}>Submit image</button>
+                <button type="submit" className="btn btn-danger" onClick={addImage}>Submit image</button>
             </div>
         </div>
     );
