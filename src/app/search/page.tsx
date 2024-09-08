@@ -6,6 +6,7 @@ import {CountryTag, Tag} from "../../constants/tags"
 import Nav from "../nav"
 
 import SearchImageForm from "./search-image-form"
+import SearchMap from './search-map'
 
 function shuffle(array: String[]) {
     for (var i = array.length - 1; i >= 0; i--) {
@@ -22,6 +23,9 @@ export default function Page({ searchParams }) {
 
     var imageTagsMap: {[id: String]: ImageTags} = {};
     ids.forEach(id => imageTagsMap[id] = ImageTags.readTagsFromFile(id));
+
+    var imageMetadataMap: {[id: String]: ImageMetadata} = {};
+    ids.forEach(id => imageMetadataMap[id] = ImageMetadata.readFromFile(id));
 
     const countries = searchParams.countries;
     const tags = searchParams.tags;
@@ -59,6 +63,12 @@ export default function Page({ searchParams }) {
                             </a>
                         )}
                     </div>
+                </div>
+                <div className="mb-3 mt-3 row">
+                    <SearchMap props={{
+                        filteredIds: filteredIds,
+                        imageMetadataMap: imageMetadataMap
+                    }}/>
                 </div>
             </div>
         </div>

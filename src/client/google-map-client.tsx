@@ -48,14 +48,10 @@ class GoogleMapClient {
     public static async saveStaticStreetView(blob: Blob, imageMetadata: ImageMetadata): String {
         if (!blob) {
             console.log("Blob is invalid");
-            return;
+            return "Error";
         }
         const blobArray = Buffer.from(await blob.arrayBuffer());
-        fs.writeFileSync(`public/images/${imageMetadata.id}.jpg`, blobArray, {encoding: "binary"}, (err) => {
-            if (err) {
-                console.log("Error writing image file: " + err.toString());
-            }
-        });
+        fs.writeFileSync(`public/images/${imageMetadata.id}.jpg`, blobArray, {encoding: "binary"});
         return imageMetadata.id;
     }
 }
